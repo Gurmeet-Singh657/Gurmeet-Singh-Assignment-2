@@ -63,7 +63,7 @@ func callYoutubeClient(apiKey string) {
 	}
 }
 
-func StoreYoutubeDataSynchronously(query string) error {
+func StoreYoutubeDataAsynchronously(query string) error {
 	call := youtubeClient.Search.List([]string{"snippet"}).
 		Q(query).
 		MaxResults(20)
@@ -76,7 +76,7 @@ func StoreYoutubeDataSynchronously(query string) error {
 		if apiErr, ok := err.(*googleapi.Error); ok && apiErr.Code == 403 {
 			log.Printf("YouTube API Error: %v", apiErr)
 			switchAPIKey()
-			return StoreYoutubeDataSynchronously(query)
+			return StoreYoutubeDataAsynchronously(query)
 		}
 		return err
 	}
