@@ -10,7 +10,7 @@ const fetchInterval = 10 * time.Second
 
 func CronJob(query string) error {
 	for {
-		if err := service.StoreYoutubeDataSynchronously(query); err != nil {
+		if err := service.StoreYoutubeDataAsynchronously(query); err != nil {
 			log.Printf("Error adding videos: %v", err)
 		} else {
 			log.Print("Videos Added in Mongodb successfully")
